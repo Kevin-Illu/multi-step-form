@@ -1,18 +1,18 @@
 import type { ComponentType } from "svelte";
-import UserData from "./UserData.svelte";
+import UserInfo from "./UserInfo.svelte";
 import Other from "./Other.svelte";
 
-interface Steps {
+interface ISteps {
   [id: string]: {
     title: string;
     component: ComponentType;
   };
 }
 
-export const StepsStore: Steps = {
+export const Steps: ISteps = {
   1: {
     title: "Your Info",
-    component: UserData,
+    component: UserInfo,
   },
   2: {
     title: "Select Plan",

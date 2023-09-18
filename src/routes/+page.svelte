@@ -1,24 +1,17 @@
 <script>
   import "../app.css";
   import Card from "./Card.svelte";
+  import { Steps } from "./steps";
 
-  import { StepsStore } from "./steps";
-
-  let entries = Object.values(StepsStore);
-
-  $: componentToRender = 0; // default
+  let currentStep = 0; // default
+  const stepsList = Object.values(Steps);
 
   function GoBack() {
-    componentToRender -= 1;
+    currentStep -= 1;
   }
 
   function GoForward() {
-    componentToRender += 1;
-  }
-
-  function SetComponentToRender(e) {
-    const value = e.target.value;
-    componentToRender = value - 1; // index of the Array<entries>;
+    currentStep += 1;
   }
 </script>
 
@@ -26,19 +19,20 @@
   <title>Home</title>
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
+
 <div class="bg-alabaster h-screen relative">
   <main>
     <div class="flex flex-col">
       <div
-        class="bg-purplish-blue text-white flex justify-center gap-8 pb-24 py-8 px-2"
+        class="bg-purplish-blue text-white flex justify-center gap-4 pb-24 py-8 px-2"
       >
-        {#each entries as step, i}
+        {#each stepsList as step, i}
           <div id={step.title}>
             <button
-              on:click={SetComponentToRender}
-              value={i + 1}
-              class="{componentToRender === i + 1
-                ? 'bg-light-blue'
+              on:click={() => (currentStep = i)}
+              value={i}
+              class="{currentStep === i
+                ? 'bg-light-blue text-marine-blue border-light-blue'
                 : ''} w-8 h-8 font-semibold rounded-full grid place-items-center border-solid border-[1px] border-white"
             >
               {i + 1}
@@ -50,21 +44,23 @@
           </div>
         {/each}
       </div>
-      <Card>
-        <svelte:component this={entries[componentToRender].component} />
-      </Card>
+      <svelte:component this={stepsList[currentStep].component} />
     </div>
   </main>
+
   <footer
     class="bg-white p-4 absolute bottom-0 left-0 right-0 flex flex-row-reverse justify-between"
   >
     <button
       on:click={GoForward}
-      disabled={componentToRender > entries.length - 1}
-      class="bg-marine-blue text-white py-2 px-4 rounded-md">Next Step</button
+      disabled={currentStep >= stepsList.length - 1}
+      class="bg-marine-blue text-white py-2 px-4 rounded-md"
     >
-    {#if componentToRender > 0}
-      <button on:click={GoBack}>Go Back</button>
+      Next Step
+    </button>
+
+    {#if currentStep > 0}
+      <button on:click={GoBack} class="text-cool-gray">Go Back</button>
     {/if}
   </footer>
 </div>
