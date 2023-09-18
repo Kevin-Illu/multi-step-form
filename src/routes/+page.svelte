@@ -1,17 +1,25 @@
-<script>
-  import "../app.css";
-  import Card from "./Card.svelte";
+<script lang="ts">
+  import "../app.css";  
   import { Steps } from "./steps";
 
+  // current step is the index of the list of steps
+  // to access 
   let currentStep = 0; // default
   const stepsList = Object.values(Steps);
+  let childData: any = {}
 
   function GoBack() {
     currentStep -= 1;
   }
 
   function GoForward() {
-    currentStep += 1;
+    if (Steps[currentStep + 1].formValidator(childData)) {
+      currentStep += 1;
+    }
+  }
+
+  function handleChildData(e) {
+    childData = e.detail;
   }
 </script>
 
@@ -44,7 +52,7 @@
           </div>
         {/each}
       </div>
-      <svelte:component this={stepsList[currentStep].component} />
+      <svelte:component this={stepsList[currentStep].component} on:formsubmit={handleChildData} />
     </div>
   </main>
 
@@ -54,13 +62,13 @@
     <button
       on:click={GoForward}
       disabled={currentStep >= stepsList.length - 1}
-      class="bg-marine-blue text-white py-2 px-4 rounded-md"
+      class="bg-marine-blue text-white py-2 px-4 rounded-md hover:bg-marine-blue-light focus:bg-marine-blue-light"
     >
       Next Step
     </button>
 
     {#if currentStep > 0}
-      <button on:click={GoBack} class="text-cool-gray">Go Back</button>
+      <button on:click={GoBack} class="text-cool-gray hover:text-marine-blue focus:text-marine-blue focus:outline-none">Go Back</button>
     {/if}
   </footer>
 </div>

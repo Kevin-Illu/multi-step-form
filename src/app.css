@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+p, label, span {
+    @apply text-[16px];
+}
+
+input {
+    @apply focus:outline-none rounded-md border-[1px] border-solid border-light-gray px-4 py-2 focus:border-purplish-blue;
+}
+
+button {
+    @apply focus:outline-none;
+}
