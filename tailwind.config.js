@@ -6,7 +6,7 @@ export default {
       'marine-blue': 'hsl(213, 96%, 18%)',
       'marine-blue-light': 'hsl(213, 96%, 30%)',
       'purplish-blue': 'hsl(243, 100%, 62%)',
-      'pastel-blue': 'hsl(228, 100%, 84%)',
+      'pastel-blue': 'hsl(228, 100%, 98%)',
       'light-blue': 'hsl(206, 94%, 87%)',
       'strawberry-red': 'hsl(354, 84%, 57%)',
       'cool-gray': 'hsl(231, 11%, 63%)',

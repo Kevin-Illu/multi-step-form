@@ -7,14 +7,6 @@ export function UserInfoValidator(args: any) {
   const newErrors = ValidateForm(errors, formData);
 
   if (Object.keys(newErrors).length === 0) {
-    UserData.update((data) => {
-      data.email = formData.email;
-      data.name = formData.username;
-      data.phoneNumber = formData.phone;
-
-      return data;
-    });
-
     return true;
   }
 

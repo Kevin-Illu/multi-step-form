@@ -32,7 +32,7 @@
       Please provide your name, email address, and phone number
     </p>
   </div>
-  <div class="flex flex-col gap-4" slot="main">
+  <div class="flex flex-col gap-4 pb-4" slot="main">
     <div class="flex flex-col">
       <div class="form-label">
         <lable to="name" class="text-marine-blue">Name</lable>

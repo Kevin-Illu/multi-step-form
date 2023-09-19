@@ -1,24 +1,26 @@
 <script lang="ts">
-  import "../app.css";  
+  import "../app.css";
   import { Steps } from "./steps";
 
   // current step is the index of the list of steps
-  // to access 
-  let currentStep = 0; // default
+  let currentStep = 1; // default
   const stepsList = Object.values(Steps);
-  let childData: any = {}
+  let childData: any = {};
 
   function GoBack() {
     currentStep -= 1;
   }
 
   function GoForward() {
-    if (Steps[currentStep + 1].formValidator(childData)) {
+    const step = currentStep + 1;
+
+    if (Steps[step].formValidator(childData)) {
+      Steps[step].saveData(childData);
       currentStep += 1;
     }
   }
 
-  function handleChildData(e) {
+  function handleChildData(e: any) {
     childData = e.detail;
   }
 </script>
@@ -28,7 +30,7 @@
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<div class="bg-alabaster h-screen relative">
+<div class="bg-magnolia h-screen relative">
   <main>
     <div class="flex flex-col">
       <div
@@ -36,15 +38,13 @@
       >
         {#each stepsList as step, i}
           <div id={step.title}>
-            <button
-              on:click={() => (currentStep = i)}
-              value={i}
+            <span
               class="{currentStep === i
                 ? 'bg-light-blue text-marine-blue border-light-blue'
-                : ''} w-8 h-8 font-semibold rounded-full grid place-items-center border-solid border-[1px] border-white"
+                : 'border-white'} w-8 h-8 font-semibold rounded-full grid place-items-center border-solid border-[1px]"
             >
               {i + 1}
-            </button>
+            </span>
             <div class="hidden">
               <p>Step {i + 1}</p>
               <span>{step.title}</span>
@@ -52,12 +52,16 @@
           </div>
         {/each}
       </div>
-      <svelte:component this={stepsList[currentStep].component} on:formsubmit={handleChildData} />
+
+      <svelte:component
+        this={stepsList[currentStep].component}
+        on:formsubmit={handleChildData}
+      />
     </div>
   </main>
 
   <footer
-    class="bg-white p-4 absolute bottom-0 left-0 right-0 flex flex-row-reverse justify-between"
+    class="bg-white py-4 px-4 absolute bottom-0 left-0 right-0 flex flex-row-reverse justify-between"
   >
     <button
       on:click={GoForward}
@@ -68,7 +72,11 @@
     </button>
 
     {#if currentStep > 0}
-      <button on:click={GoBack} class="text-cool-gray hover:text-marine-blue focus:text-marine-blue focus:outline-none">Go Back</button>
+      <button
+        on:click={GoBack}
+        class="text-cool-gray hover:text-marine-blue focus:text-marine-blue focus:outline-none font-semibold"
+        >Go Back</button
+      >
     {/if}
   </footer>
 </div>

@@ -1,13 +1,17 @@
 import type { ComponentType } from "svelte";
-import UserInfo from "./steps/UserInfo/UserInfo.svelte";
+import UserInfo from "./steps/UserInfo/index.svelte";
+import SelectPlan from "./steps/SelectPlan/index.svelte";
 import Other from "./steps/Other.svelte";
 import { UserInfoValidator } from "./steps/UserInfo/validateForm";
+import { Save as SaveUserData } from "./steps/UserInfo/SaveUserData";
+import { Save as SavePlan } from "./steps/SelectPlan/SaveSelectionPlan";
 
 interface ISteps {
   [id: string]: {
     title: string;
     component: ComponentType;
     formValidator: (args?: any) => boolean;
+    saveData: (args?: any) => void;
   };
 }
 
@@ -16,20 +20,24 @@ export const Steps: ISteps = {
     title: "Your Info",
     component: UserInfo,
     formValidator: UserInfoValidator,
+    saveData: SaveUserData,
   },
   2: {
     title: "Select Plan",
-    component: Other,
+    component: SelectPlan,
     formValidator: () => true,
+    saveData: SavePlan,
   },
   3: {
     title: "Add-Ons",
     component: Other,
     formValidator: () => true,
+    saveData: () => null,
   },
   4: {
     title: "Sumary",
     component: Other,
     formValidator: () => true,
+    saveData: () => null,
   },
 };
