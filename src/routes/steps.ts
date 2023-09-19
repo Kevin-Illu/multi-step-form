@@ -1,10 +1,14 @@
 import type { ComponentType } from "svelte";
-import UserInfo from "./steps/UserInfo/index.svelte";
-import SelectPlan from "./steps/SelectPlan/index.svelte";
-import Other from "./steps/Other.svelte";
-import { UserInfoValidator } from "./steps/UserInfo/validateForm";
-import { SaveUserData } from "./steps/UserInfo/SaveUserData";
-import { SavePlan } from "./steps/SelectPlan/SaveSelectionPlan";
+
+import UserInfo from "./../steps/UserInfo/index.svelte";
+import { SaveUserData } from "./../steps/UserInfo/SaveUserData";
+import { UserInfoValidator } from "./../steps/UserInfo/validateForm";
+
+import SelectPlan from "./../steps/SelectPlan/index.svelte";
+import { SavePlan } from "./../steps/SelectPlan/SaveSelectionPlan";
+
+import Other from "./../steps/Other.svelte";
+
 
 interface ISteps {
   [id: string]: {

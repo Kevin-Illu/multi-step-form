@@ -1,40 +1,16 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from "svelte";
   import Card from "../../components/Card.svelte";
   import { subscriptions } from "./data";
-  let dispatch = createEventDispatcher();
+  import SubscriptionItem from "./SubscriptionItem.svelte";
 
-  let selectedSubscription: Subscription = {
-    name: "",
-    price: 0,
-    type: "monthly",
-  };
-
-  let subscriptionIndex: number | null;
+  let optionSelected = 1;
   let isSuscriptionPerMonth = false;
   let typeOfSubscription: SubscriptionType = "monthly";
-  $: {
-    typeOfSubscription = isSuscriptionPerMonth ? "yearly" : "monthly";
+  $: typeOfSubscription = isSuscriptionPerMonth ? "yearly" : "monthly";
+
+  function handleSelect(key: number) {
+    optionSelected = key;
   }
-
-  function selectIndexOfSubscription(subscription: number) {
-    subscriptionIndex = subscription;
-  }
-
-  function handleSelection(selection: Subscription) {
-    dispatch("formsubmit", {
-      formData: selection,
-      errors: {},
-    });
-  }
-
-  onMount(() => {
-    selectIndexOfSubscription(1);
-  });
-
-  onDestroy(() => {
-    dispatch = () => false;
-  });
 </script>
 
 <Card>
@@ -44,52 +20,23 @@
       You have the option of monthly or yearly billing.
     </p>
   </div>
+
   <div slot="main">
+    <!-- list of subscriptions -->
     <div class="flex flex-col gap-3">
       {#each Object.entries(subscriptions) as s, i}
-        <di
-          id={s[0]}
-          class="flex gap-4 p-3 border-[1px] rounded-md {subscriptionIndex ===
-          i + 1
-            ? 'border-purplish-blue bg-pastel-blue'
-            : 'border-light-gray'}"
-          role="button"
-          tabindex="0"
-          on:click={() => {
-            selectIndexOfSubscription(i + 1);
-            handleSelection({
-              name: s[0],
-              price: s[1].price[typeOfSubscription],
-              type: typeOfSubscription,
-            });
-          }}
-          on:keydown={(event) => {
-            if (event.key === "Enter") {
-              selectIndexOfSubscription(i + 1);
-            }
-          }}
-        >
-          <div>
-            <img src={s[1].iconPath} alt={s[0]} width="40" height="40" />
-          </div>
-          <div>
-            <p class="font-semibold text-marine-blue">{s[0]}</p>
-            <p class="text-cool-gray text-sm font-semibold">
-              ${s[1].price[typeOfSubscription]}/{typeOfSubscription ===
-              "monthly"
-                ? "mo"
-                : "yr"}
-            </p>
-            {#if typeOfSubscription === "yearly"}
-              <p class="text-[12px] text-marine-blue font-semibold">
-                2 months free
-              </p>
-            {/if}
-          </div>
-        </di>
+        <SubscriptionItem
+          {optionSelected}
+          handleSelectionChange={handleSelect}
+          subscription={s}
+          type={typeOfSubscription}
+          key={i}
+          on:formsubmit
+        />
       {/each}
     </div>
 
+    <!-- switch component -->
     <div
       class="bg-alabaster font-semibold flex items-center justify-center gap-4 px-2 py-3 rounded-md mt-4"
     >

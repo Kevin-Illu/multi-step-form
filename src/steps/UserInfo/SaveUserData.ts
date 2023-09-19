@@ -1,4 +1,4 @@
-import { UserData } from "../../store";
+import { UserData } from "./../../routes/store";
 import type { FormDataType } from "./types";
 
 export function SaveUserData(data: FormDataType) {

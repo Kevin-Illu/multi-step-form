@@ -1,5 +1,4 @@
 import type { FormDataType, FormErrors, Validator } from "./types";
-import { UserData } from "../../store";
 
 export function UserInfoValidator(args: any) {
   const { errors, formData } = args;

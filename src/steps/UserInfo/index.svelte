@@ -3,11 +3,12 @@
   import Card from "../../components/Card.svelte";
   import type { FormDataType, FormErrors } from "./types";
   import { writable } from "svelte/store";
+  import { UserData } from "./../../routes/store";
 
   let formData: FormDataType = {
-    username: "",
-    email: "",
-    phone: "",
+    username: $UserData.name || "",
+    email: $UserData.email || "",
+    phone: $UserData.phoneNumber || "",
   };
 
   let errors = writable<FormErrors>({});

@@ -1,4 +1,4 @@
-import { UserData } from "../../store";
+import { UserData } from "./../../routes/store";
 
 export function SavePlan(subscription: Subscription) {
   UserData.update((userData) => {
