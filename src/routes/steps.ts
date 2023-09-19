@@ -3,8 +3,8 @@ import UserInfo from "./steps/UserInfo/index.svelte";
 import SelectPlan from "./steps/SelectPlan/index.svelte";
 import Other from "./steps/Other.svelte";
 import { UserInfoValidator } from "./steps/UserInfo/validateForm";
-import { Save as SaveUserData } from "./steps/UserInfo/SaveUserData";
-import { Save as SavePlan } from "./steps/SelectPlan/SaveSelectionPlan";
+import { SaveUserData } from "./steps/UserInfo/SaveUserData";
+import { SavePlan } from "./steps/SelectPlan/SaveSelectionPlan";
 
 interface ISteps {
   [id: string]: {

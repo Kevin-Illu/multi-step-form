@@ -1,5 +1,8 @@
 <script>
   import Card from "../components/Card.svelte";
+  import { UserData } from "../store";
+
+  console.log($UserData)
 </script>
 
 <Card>

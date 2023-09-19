@@ -1,4 +1,4 @@
-type Subscription = {
+type SubscriptionData = {
   [key: string]: {
     iconPath: string;
     price: {

@@ -6,15 +6,16 @@ type AddOnsType = {
 
 type SubscriptionType = "monthly" | "yearly";
 
-type subscription = {
+type Subscription = {
   price: number;
-  name: SubscriptionType;
-}
+  name: string;
+  type: SubscriptionType;
+};
 
 type UserInformation = {
   name: string;
   email: string;
   phoneNumber: string;
-  subscription: subscription;
+  subscription: Subscription;
   addOns: Record<string, AddOnsType>;
 };

@@ -1,4 +1,4 @@
-export const subscriptions: Subscription = {
+export const subscriptions: SubscriptionData = {
   Arcade: {
     iconPath: "images/icon-arcade.svg",
     price: {

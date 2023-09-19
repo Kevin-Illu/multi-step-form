@@ -3,7 +3,7 @@
   import { Steps } from "./steps";
 
   // current step is the index of the list of steps
-  let currentStep = 1; // default
+  let currentStep = 0; // default
   const stepsList = Object.values(Steps);
   let childData: any = {};
 
@@ -15,7 +15,7 @@
     const step = currentStep + 1;
 
     if (Steps[step].formValidator(childData)) {
-      Steps[step].saveData(childData);
+      Steps[step].saveData(childData.formData);
       currentStep += 1;
     }
   }

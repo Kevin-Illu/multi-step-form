@@ -4,11 +4,11 @@ const defaultUserData: UserInformation = {
   name: "",
   email: "",
   phoneNumber: "",
-  plan: {
-    name: "",
+  subscription: {
     price: 0,
+    name: "",
+    type: ""
   },
-  subscriptionType: "monthly",
   addOns: {},
 };
 
