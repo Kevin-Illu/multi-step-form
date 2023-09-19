@@ -24,6 +24,7 @@
 
   let dispatch = createEventDispatcher();
 
+
   onMount(() => {
     if (!$UserData.subscription) {
       const defaultSubscription = Object.entries(subscriptions)[0];
@@ -53,7 +54,7 @@
           {optionSelected}
           handleSelectionChange={handleSelect}
           subscription={s}
-          type={typeOfSubscription}
+          type={isSuscriptionPerMonth}
           key={i}
           on:formsubmit
         />
@@ -68,7 +69,7 @@
         Monthly
       </p>
       <label class="switch">
-        <input type="checkbox" bind:checked={isSuscriptionPerMonth} />
+        <input type="checkbox" bind:value={isSuscriptionPerMonth} />
         <span class="slider round" />
       </label>
       <p class={isSuscriptionPerMonth ? "text-marine-blue" : "text-cool-gray"}>

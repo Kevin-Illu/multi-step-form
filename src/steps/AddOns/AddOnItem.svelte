@@ -7,21 +7,21 @@
 
   let isChecked = false;
 
-  // let price =
-  //   ($UserData.subscription?.type === "monthly"
-  //     ? AddOn.price.month
-  //     : AddOn.price.year) || 0;
+  let price =
+    ($UserData.subscription?.type === "monthly"
+      ? AddOn.price.month
+      : AddOn.price.year) || 0;
 
-  // $: {
-  //   isChecked ? add(finalAddon) : remove(finalAddon);
-  // }
+  $: {
+    isChecked ? add(finalAddon) : remove(finalAddon);
+  }
 
-  // let finalAddon: { [key: string]: AddOnsType } = {
-  //   [AddOn.name]: {
-  //     active: isChecked,
-  //     price,
-  //   },
-  // };
+  let finalAddon: { [key: string]: AddOnsType } = {
+    [AddOn.name]: {
+      active: isChecked,
+      price,
+    },
+  };
 </script>
 
 <div>
@@ -34,10 +34,7 @@
       <p>{AddOn.description}</p>
     </div>
     <div>
-      {console.log($UserData)}
-    </div>
-    <!-- <div>
       +${price}/{$UserData.subscription?.type === "monthly" ? "mo" : "yr"}
-    </div> -->
+    </div>
   </div>
 </div>

@@ -6,23 +6,18 @@
   key = key + 1;
 
   export let subscription;
-  export let type: SubscriptionType;
+  export let type: boolean;
   export let handleSelectionChange: (key: number) => void;
 
+  $: typeOfSubscription = !type ? "monthly" : "yearly" as SubscriptionType;
   const name = subscription[0];
   const SubscriptionValue = subscription[1];
 
   export let optionSelected: number;
   $: isSelected = optionSelected === key;
-
-  let dispatch = createEventDispatcher();
-
-  onDestroy(() => {
-    dispatch = () => false;
-  });
 </script>
 
-<di
+<div
   id={name}
   class="flex gap-4 p-3 border-[1px] rounded-md {isSelected
     ? 'border-purplish-blue bg-pastel-blue'
@@ -32,11 +27,9 @@
   on:click={() => {
     const selection = {
       name,
-      price: SubscriptionValue.price[type],
-      type,
+      price: SubscriptionValue.price[typeOfSubscription],
+      type: typeOfSubscription,
     };
-    
-    console.log(selection);
     handleSelection(selection);
 
     handleSelectionChange(key);
@@ -53,10 +46,10 @@
   <div>
     <p class="font-semibold text-marine-blue">{name}</p>
     <p class="text-cool-gray text-sm font-semibold">
-      ${SubscriptionValue.price[type]}/{type === "monthly" ? "mo" : "yr"}
+      ${SubscriptionValue.price[typeOfSubscription]}/{typeOfSubscription === "monthly" ? "mo" : "yr"}
     </p>
-    {#if type === "yearly"}
+    {#if typeOfSubscription === "yearly"}
       <p class="text-[12px] text-marine-blue font-semibold">2 months free</p>
     {/if}
   </div>
-</di>
+</div>
