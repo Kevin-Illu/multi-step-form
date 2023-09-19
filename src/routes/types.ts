@@ -1,7 +1,6 @@
 type AddOnsType = {
   active: boolean;
-  pricePerMonth: number;
-  pricePerYear: number;
+  price: number;
 };
 
 type SubscriptionType = "monthly" | "yearly";
@@ -9,7 +8,7 @@ type SubscriptionType = "monthly" | "yearly";
 type Subscription = {
   price: number;
   name: string;
-  type: SubscriptionType;
+  type: SubscriptionType | null;
 };
 
 type UserInformation = {

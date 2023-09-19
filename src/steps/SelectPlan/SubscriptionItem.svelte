@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy } from "svelte";
 
+  export let handleSelection: (select: Subscription) => void;
   export let key: number;
   key = key + 1;
 
@@ -15,12 +16,6 @@
   $: isSelected = optionSelected === key;
 
   let dispatch = createEventDispatcher();
-  function handleSelection(selection: Subscription) {
-    dispatch("formsubmit", {
-      formData: selection,
-      errors: {},
-    });
-  }
 
   onDestroy(() => {
     dispatch = () => false;
@@ -35,11 +30,14 @@
   role="button"
   tabindex="0"
   on:click={() => {
-    handleSelection({
+    const selection = {
       name,
       price: SubscriptionValue.price[type],
       type,
-    });
+    };
+    
+    console.log(selection);
+    handleSelection(selection);
 
     handleSelectionChange(key);
   }}

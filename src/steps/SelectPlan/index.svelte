@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { createEventDispatcher, onMount } from "svelte";
+
+  import { UserData } from "../../routes/store";
   import Card from "../../components/Card.svelte";
   import { subscriptions } from "./data";
   import SubscriptionItem from "./SubscriptionItem.svelte";
@@ -11,6 +14,26 @@
   function handleSelect(key: number) {
     optionSelected = key;
   }
+
+  function handleSelection(selection: Subscription) {
+    dispatch("formsubmit", {
+      formData: selection,
+      errors: {},
+    });
+  }
+
+  let dispatch = createEventDispatcher();
+
+  onMount(() => {
+    if (!$UserData.subscription) {
+      const defaultSubscription = Object.entries(subscriptions)[0];
+      handleSelection({
+        type: "monthly",
+        name: defaultSubscription[0],
+        price: defaultSubscription[1].price.monthly,
+      });
+    }
+  });
 </script>
 
 <Card>
@@ -26,6 +49,7 @@
     <div class="flex flex-col gap-3">
       {#each Object.entries(subscriptions) as s, i}
         <SubscriptionItem
+          {handleSelection}
           {optionSelected}
           handleSelectionChange={handleSelect}
           subscription={s}

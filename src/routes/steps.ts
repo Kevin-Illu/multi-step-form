@@ -7,6 +7,7 @@ import { UserInfoValidator } from "./../steps/UserInfo/validateForm";
 import SelectPlan from "./../steps/SelectPlan/index.svelte";
 import { SavePlan } from "./../steps/SelectPlan/SaveSelectionPlan";
 
+import AddOns from "./../steps/AddOns/index.svelte"
 import Other from "./../steps/Other.svelte";
 
 
@@ -34,7 +35,7 @@ export const Steps: ISteps = {
   },
   3: {
     title: "Add-Ons",
-    component: Other,
+    component: AddOns,
     formValidator: () => true,
     saveData: () => null,
   },

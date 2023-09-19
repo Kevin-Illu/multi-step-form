@@ -7,7 +7,7 @@ const defaultUserData: UserInformation = {
   subscription: {
     price: 0,
     name: "",
-    type: ""
+    type: null,
   },
   addOns: {},
 };
