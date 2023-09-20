@@ -6,35 +6,26 @@
   import { subscriptions } from "./data";
   import SubscriptionItem from "./SubscriptionItem.svelte";
 
-  let optionSelected = 1;
-  let isSuscriptionPerMonth = false;
-  let typeOfSubscription: SubscriptionType = "monthly";
-  $: typeOfSubscription = isSuscriptionPerMonth ? "yearly" : "monthly";
+  let selection: Subscription = {
+    name: $UserData.subscription.name || "Arcade",
+    type: $UserData.subscription.type ?? "monthly",
+    price: $UserData.subscription.price || 9,
+  };
 
-  function handleSelect(key: number) {
-    optionSelected = key;
-  }
+  let isChecked = selection.type === "yearly";
+  let dispatch = createEventDispatcher();
 
-  function handleSelection(selection: Subscription) {
+  onMount(() => {
     dispatch("formsubmit", {
       formData: selection,
       errors: {},
     });
-  }
-
-  let dispatch = createEventDispatcher();
-
-
-  onMount(() => {
-    if (!$UserData.subscription) {
-      const defaultSubscription = Object.entries(subscriptions)[0];
-      handleSelection({
-        type: "monthly",
-        name: defaultSubscription[0],
-        price: defaultSubscription[1].price.monthly,
-      });
-    }
   });
+
+  function handleChange(e: Event) {
+    let selectedType: SubscriptionType = isChecked ? "yearly" : "monthly";
+    selection.type = selectedType;
+  }
 </script>
 
 <Card>
@@ -50,12 +41,9 @@
     <div class="flex flex-col gap-3">
       {#each Object.entries(subscriptions) as s, i}
         <SubscriptionItem
-          {handleSelection}
-          {optionSelected}
-          handleSelectionChange={handleSelect}
           subscription={s}
-          type={isSuscriptionPerMonth}
           key={i}
+          bind:selection
           on:formsubmit
         />
       {/each}
@@ -65,16 +53,16 @@
     <div
       class="bg-alabaster font-semibold flex items-center justify-center gap-4 px-2 py-3 rounded-md mt-4"
     >
-      <p class={!isSuscriptionPerMonth ? "text-marine-blue" : "text-cool-gray"}>
-        Monthly
-      </p>
+      <p class={!isChecked ? "text-marine-blue" : "text-cool-gray"}>Monthly</p>
       <label class="switch">
-        <input type="checkbox" bind:value={isSuscriptionPerMonth} />
+        <input
+          type="checkbox"
+          bind:checked={isChecked}
+          on:change={handleChange}
+        />
         <span class="slider round" />
       </label>
-      <p class={isSuscriptionPerMonth ? "text-marine-blue" : "text-cool-gray"}>
-        Yearly
-      </p>
+      <p class={isChecked ? "text-marine-blue" : "text-cool-gray"}>Yearly</p>
     </div>
   </div>
 </Card>

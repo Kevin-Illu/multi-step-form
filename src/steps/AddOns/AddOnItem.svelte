@@ -2,8 +2,8 @@
   import { UserData } from "../../routes/store";
 
   export let AddOn: AddOn;
-  export let remove: any;
-  export let add: any;
+  // export let remove: any;
+  // export let add: any;
 
   let isChecked = false;
 
@@ -12,9 +12,9 @@
       ? AddOn.price.month
       : AddOn.price.year) || 0;
 
-  $: {
-    isChecked ? add(finalAddon) : remove(finalAddon);
-  }
+  // $: {
+  //   isChecked ? add(finalAddon) : remove(finalAddon);
+  // }
 
   let finalAddon: { [key: string]: AddOnsType } = {
     [AddOn.name]: {

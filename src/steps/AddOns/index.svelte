@@ -4,32 +4,32 @@
   import AddOnItem from "./AddOnItem.svelte";
   import { AddOns } from "./data";
 
-  let addOns: any = [];
+  // let addOns: any = [];
 
-  function addItem(addon: any) {
-    addOns.push(addon);
-  }
+  // function addItem(addon: any) {
+  //   addOns.push(addon);
+  // }
 
-  function removeItem(addon: any) {
-    const index = addOns.indexOf(addon);
+  // function removeItem(addon: any) {
+  //   const index = addOns.indexOf(addon);
 
-    if (index < 0) return
+  //   if (index < 0) return
 
-    addOns.splice(index, 1);
-  }
+  //   addOns.splice(index, 1);
+  // }
 
-  let dispatch = createEventDispatcher();
+  // let dispatch = createEventDispatcher();
 
-  onMount(() => {
-    dispatch("formsubmit", {
-      formdata: addOns,
-      errors: {},
-    });
-  });
+  // onMount(() => {
+  //   dispatch("formsubmit", {
+  //     formdata: addOns,
+  //     errors: {},
+  //   });
+  // });
 
-  onDestroy(() => {
-    dispatch = () => false;
-  });
+  // onDestroy(() => {
+  //   dispatch = () => false;
+  // });
 </script>
 
 <Card>
@@ -39,7 +39,7 @@
   </div>
   <div slot="main">
     {#each Object.entries(AddOns) as AddOn}
-      <AddOnItem AddOn={AddOn[1]} add={addItem} remove={removeItem} />
+      <AddOnItem AddOn={AddOn[1]} />
     {/each}
   </div>
 </Card>
