@@ -23,8 +23,11 @@
   });
 
   function handleChange(e: Event) {
-    let selectedType: SubscriptionType = isChecked ? "yearly" : "monthly";
+    const selectedType: SubscriptionType = isChecked ? "yearly" : "monthly";
+    const selectedPrice = subscriptions[selection.name].price[selectedType]
+
     selection.type = selectedType;
+    selection.price = selectedPrice;
   }
 </script>
 

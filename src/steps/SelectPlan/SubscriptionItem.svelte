@@ -1,14 +1,11 @@
 <script lang="ts">
   export let selection: Subscription;
-  const isThisSelected = false;
-
   export let key: number;
   key = key + 1;
 
   export let subscription;
   const name = subscription[0];
   const subscriptionInfo = subscription[1];
-  const price = subscriptionInfo.price[selection.type];
 </script>
 
 <div
@@ -20,11 +17,17 @@
   tabindex="0"
   on:click={() => {
     selection.name = name;
-    selection.price = subscriptionInfo.price[selection.type];
+
+    if (selection.type) {
+      selection.price = subscriptionInfo.price[selection.type];
+    }
   }}
   on:keydown={(event) => {
-    if (event.key === "Enter") {
-      selection.name = name;
+    if (event.key !== "Enter") return;
+
+    selection.name = name;
+
+    if (selection.type) {
       selection.price = subscriptionInfo.price[selection.type];
     }
   }}
