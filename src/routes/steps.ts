@@ -7,14 +7,14 @@ import { UserInfoValidator } from "./../steps/UserInfo/validateForm";
 import SelectPlan from "./../steps/SelectPlan/index.svelte";
 import { SavePlan } from "./../steps/SelectPlan/SaveSelectionPlan";
 
-import AddOns from "./../steps/AddOns/index.svelte"
+import AddOns from "./../steps/AddOns/index.svelte";
 import { SaveAddOns } from "../steps/AddOns/SaveAddOns";
 
-import Other from "./../steps/Other.svelte";
-
+import Finishing from "../steps/Finishing.svelte";
+import End from "../steps/End.svelte";
 
 interface ISteps {
-  [id: string]: {
+  [id: string | "null"]: {
     title: string;
     component: ComponentType;
     formValidator: (args?: any) => boolean;
@@ -43,7 +43,13 @@ export const Steps: ISteps = {
   },
   4: {
     title: "Sumary",
-    component: Other,
+    component: Finishing,
+    formValidator: () => true,
+    saveData: () => null,
+  },
+  null: {
+    title: "Thank You",
+    component: End,
     formValidator: () => true,
     saveData: () => null,
   },
