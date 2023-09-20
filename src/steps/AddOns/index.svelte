@@ -1,35 +1,19 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
+
   import Card from "../../components/Card.svelte";
   import AddOnItem from "./AddOnItem.svelte";
   import { AddOns } from "./data";
 
-  // let addOns: any = [];
+  let addOns: Array<{ [key: string]: AddOnsType }> = [];
 
-  // function addItem(addon: any) {
-  //   addOns.push(addon);
-  // }
-
-  // function removeItem(addon: any) {
-  //   const index = addOns.indexOf(addon);
-
-  //   if (index < 0) return
-
-  //   addOns.splice(index, 1);
-  // }
-
-  // let dispatch = createEventDispatcher();
-
-  // onMount(() => {
-  //   dispatch("formsubmit", {
-  //     formdata: addOns,
-  //     errors: {},
-  //   });
-  // });
-
-  // onDestroy(() => {
-  //   dispatch = () => false;
-  // });
+  let dispatch = createEventDispatcher();
+  onMount(() => {
+    dispatch("formsubmit", {
+      formData: addOns,
+      errors: {},
+    });
+  });
 </script>
 
 <Card>
@@ -38,8 +22,10 @@
     <p class="text-cool-gray">Add-ons help enhance your gaming experience.</p>
   </div>
   <div slot="main">
-    {#each Object.entries(AddOns) as AddOn}
-      <AddOnItem AddOn={AddOn[1]} />
-    {/each}
+    <div class="flex gap-3 flex-col">
+      {#each Object.entries(AddOns) as AddOn}
+        <AddOnItem AddOn={AddOn[1]} AddOns={addOns} />
+      {/each}
+    </div>
   </div>
 </Card>

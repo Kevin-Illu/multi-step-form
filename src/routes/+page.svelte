@@ -3,7 +3,7 @@
   import { Steps } from "./steps";
 
   // current step is the index of the list of steps
-  let currentStep = 1; // default
+  let currentStep = 2; // default
   const stepsList = Object.values(Steps);
   let childData: any = {};
 

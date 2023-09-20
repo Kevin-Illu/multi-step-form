@@ -8,6 +8,8 @@ import SelectPlan from "./../steps/SelectPlan/index.svelte";
 import { SavePlan } from "./../steps/SelectPlan/SaveSelectionPlan";
 
 import AddOns from "./../steps/AddOns/index.svelte"
+import { SaveAddOns } from "../steps/AddOns/SaveAddOns";
+
 import Other from "./../steps/Other.svelte";
 
 
@@ -37,7 +39,7 @@ export const Steps: ISteps = {
     title: "Add-Ons",
     component: AddOns,
     formValidator: () => true,
-    saveData: () => null,
+    saveData: SaveAddOns,
   },
   4: {
     title: "Sumary",
