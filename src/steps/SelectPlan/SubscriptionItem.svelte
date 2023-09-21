@@ -12,7 +12,7 @@
   id={name}
   class="flex gap-4 p-3 border-[1px] rounded-md {selection.name === name
     ? 'border-purplish-blue bg-pastel-blue'
-    : 'border-light-gray'}"
+    : 'border-light-gray'} lg:flex-col lg:w-full lg:gap-12"
   role="button"
   tabindex="0"
   on:click={() => {

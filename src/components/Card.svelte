@@ -1,5 +1,5 @@
 <form
-  class="container my-0 mx-auto w-[90%] -mt-16 bg-white rounded-md p-6 shadow-lg shadow-light-gray"
+  class="md:grow -mt-16 md:mt-0 bg-white rounded-md p-6 shadow-md shadow-light-gray md:shadow-none lg:w-[86%] mx-auto my-0"
 >
   <header>
     <slot name="header" />

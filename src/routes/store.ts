@@ -12,5 +12,5 @@ const defaultUserData: UserInformation = {
   addOns: {},
 };
 
-export const PageIndex = writable(3)
+export const PageIndex = writable(0)
 export const UserData = writable<UserInformation>(defaultUserData);

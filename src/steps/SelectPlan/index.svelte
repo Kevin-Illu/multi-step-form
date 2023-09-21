@@ -41,7 +41,7 @@
 
   <div slot="main">
     <!-- list of subscriptions -->
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3 lg:flex-row">
       {#each Object.entries(subscriptions) as s, i}
         <SubscriptionItem
           subscription={s}
@@ -54,7 +54,7 @@
 
     <!-- switch component -->
     <div
-      class="bg-alabaster font-semibold flex items-center justify-center gap-4 px-2 py-3 rounded-md mt-4"
+      class="bg-alabaster font-semibold flex items-center justify-center gap-4 px-2 py-3 rounded-md mt-4 lg:mt-8"
     >
       <p class={!isChecked ? "text-marine-blue" : "text-cool-gray"}>Monthly</p>
       <label class="switch">
